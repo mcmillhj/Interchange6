@@ -5,6 +5,7 @@ package Interchange6::Cart::Product;
 use strict;
 use Moo;
 use Interchange6::Types;
+use MooX::HandlesVia;
 
 use namespace::clean;
 
@@ -95,9 +96,37 @@ has uri => (
     isa      => VarChar [255],
 );
 
+=item attributes
+
+Product attributes hashref to store things such as size, colour, etc.
+
+=cut
+
+has attributes => (
+    is  => 'rw',
+    isa => HashRef,
+    default => sub { {} },
+    handles => {
+        clear_attributes => 'clear',
+        add_attribute    => 'set',
+    }
+);
+
 =back
 
 =head1 METHODS
+
+=head2 add_attribute( $key => $value, $key2 => $value2...)
+
+Add one or more key/value pair to L</attributes>.
+
+=head2 all_attributes
+
+Returns the key/value pairs in L</attributes> as a flattened list.
+
+=head2 clear_attributes
+
+Clears the L</attributes> attribute.
 
 =head2 subtotal
 
