@@ -623,6 +623,17 @@ sub update {
     $self->set_error( join( ":", @errors ) ) if scalar(@errors) > 1;
 }
 
+=head1 PRIVATE METHODS
+
+=head2 _trigger_target
+
+=cut
+
+sub _trigger_target {
+    my ( $self, $value ) = @_;
+    die "target not defined" unless defined $value;
+}
+
 # after cost changes we need to clear the total
 
 after apply_cost => sub {

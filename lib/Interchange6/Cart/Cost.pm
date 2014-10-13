@@ -8,6 +8,8 @@ use Interchange6::Types;
 
 use namespace::clean;
 
+requires '_trigger_target';
+
 =head1 NAME 
 
 Interchange6::Cart::Cost - Cart cost class for Interchange6 Shop Machine
@@ -114,6 +116,20 @@ has current_amount => (
     coerce => sub { sprintf( "%.2f", $_[0] ) },
 );
 
+=item * target
+
+Determines the calculation phase in which cost is applied. Consuming roles must supply a C<_trigger_target> method which validates this attribute.
+
+Target is the attribute whose value will be affected by applying this cost.
+
+Product discounts should have a target of C<price> since discounts must be applied to price before such things as per-product taxes which should have a target of C<subtotal>. Cart costs such as handling and shipping whould have a target of C<total> since they are applied to the C<subtotal> but affect the total.
+
+=cut
+
+has target => (
+    is      => 'rw',
+);
+
 =back
 
 =head1 PRIVATE METHODS
@@ -128,5 +144,9 @@ sub _build_label {
     my $self = shift;
     return $self->name;
 };
+
+=head1 _trigger_target
+
+Checks that L</target> is defined and 
 
 1;

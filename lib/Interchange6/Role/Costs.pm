@@ -13,7 +13,7 @@ use namespace::clean;
 
 =head1 ATTRIBUTES
 
-=head2 costs
+=head2 _costs
 
 Holds an array reference of L<Interchange::Cart::Cost> items.
 
@@ -21,7 +21,7 @@ When called without arguments returns an array reference of all costs associated
 
 =cut
 
-has costs => (
+has _costs => (
     is          => 'rw',
     isa         => ArrayRef [ InstanceOf ['Interchange::Cart::Cost'] ],
     default     => sub { [] },
@@ -35,6 +35,20 @@ has costs => (
         get_costs   => 'elements',
     },
     init_arg => undef,
+);
+
+=head2 available_targets
+
+The list of possible L</target> names. Returns a array reference of possible targets. Default list contains only 'total'.
+
+Consuming classes can override the default to provide their own list of possible targets.
+
+=cut
+
+has possible_targets => (
+    is      => 'rw',
+    isa     => ArrayRef,
+    default => { [qw/ total /] },
 );
 
 =head1 METHODS
