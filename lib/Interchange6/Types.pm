@@ -47,6 +47,11 @@ my $defs = [
         test => sub { defined($_[0]) && $_[0] =~ /^(\d+)(\.\d+)?$/ && $_[0] > 0 },
         message => sub { "is not a positive numeric." }
     },
+    {
+        name => 'Zero',
+        test => sub { defined($_[0]) && $_[0] == 0 },
+        message => sub { "is not zero." }
+    },
 ];
 
 for my $type (
