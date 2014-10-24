@@ -1,6 +1,4 @@
-# Interchange6::Cart::Cost - Interchange6 cart cost class
-
-package Interchange6::Cart::Cost;
+package Interchange6::Cart::Charge;
 
 use strict;
 use Moo;
@@ -8,15 +6,13 @@ use Interchange6::Types;
 
 use namespace::clean;
 
-requires '_trigger_target';
-
 =head1 NAME 
 
-Interchange6::Cart::Cost - Cart cost class for Interchange6 Shop Machine
+Interchange6::Cart::Charge - Cart charge class for Interchange6 Shop Machine
 
 =head1 DESCRIPTION
 
-Cart cost class for L<Interchange6>.
+Cart charge class for L<Interchange6>.
 
 =head2 ATTRIBUTES
 
@@ -24,7 +20,7 @@ Cart cost class for L<Interchange6>.
 
 =item * id
 
-Cart id can be used for subclasses, e.g. primary key value for cart or product costs in the database.
+Charge id can be used for subclasses, e.g. primary key value for cart or product charge in the database.
 
 =cut
 
@@ -58,7 +54,9 @@ has label => (
 
 =item * relative
 
-Boolean defaults to 0. If true then L<amount> is relative to L<object subtotal|Intechange6::Role::Cost/subtotal>. If false then L<amount> is an absolute cost.
+Boolean defaults to 0.
+
+For cart charges: if true then L<amount> is relative to L<cart subtotal|Intechange6::Role::Cost/subtotal>. If false then L<amount> is an absolute cost.
 
 =cut
 

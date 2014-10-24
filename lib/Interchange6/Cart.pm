@@ -59,6 +59,18 @@ has id => (
     isa => Str,
 );
 
+=head2 customer_group
+
+Customer group is used in group pricing and tier pricing to calculate selling_price.
+
+=cut
+
+has customer_group => (
+    is        => 'rw',
+    isa       => Str,
+    predicate => 1,
+);
+
 =head2 discount_percent
 
 Cart-wide discount percentage applied to each product in the cart after any product discounts and before product costs.
